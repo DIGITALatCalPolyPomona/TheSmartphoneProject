@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "jackboys")(type "KiCad")(uri "${KIPRJMOD}/jackboys.kicad_sym")(options "")(descr ""))
+)
