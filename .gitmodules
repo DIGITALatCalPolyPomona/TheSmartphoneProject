@@ -1,4 +1,4 @@
-[submodule "Znq-Carrier-Power"]
-	path = Znq-Carrier-Power
-	url = https://github.com/eryn-chen/Znq-Carrier-Power
+[submodule "Zynq-Carrier-Power"]
+	path = Zynq-Carrier-Power
+	url = https://github.com/eryn-chen/Zynq-Carrier-Power
 	branch = master
