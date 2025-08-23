@@ -2,3 +2,7 @@
 	path = Zynq-Carrier-Power
 	url = https://github.com/eryn-chen/Zynq-Carrier-Power
 	branch = master
+[submodule "DIGITALBot"]
+	path = DIGITALBot
+	url = https://github.com/AngeloDuenas/DIGITALBot.git
+	branch = master
