@@ -5,4 +5,4 @@
 [submodule "DIGITALBot"]
 	path = DIGITALBot
 	url = https://github.com/AngeloDuenas/DIGITALBot.git
-	branch = master
+	branch = main
