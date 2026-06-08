@@ -36,8 +36,8 @@ as I2C slaves.
 │        │ I2C: 0x60   │            │ I2C: 0x46    │   │
 │        │ QFN-30      │            │ LGA-10       │   │
 │        └──┬──────────┘            └──────────┬──┘   │
-│           │SCL,SDA                    SCL,SDA│      │
-│           │ALERT_1–4                      INT│      │
+│           │SCL,SDA (not wired)        SCL,SDA│      │
+│           │ALERT_1–4 (not wired)          INT│      │
 │  GND ─────┴───────────────────────────────┴─┘      │
 │                                                     │
 │  TC1 (External Thermocouple) ──► U1 VIN+/VIN-      │
@@ -58,17 +58,25 @@ is responsible for SCL and SDA pull-ups to 3.3V.
 
 ## Signal Inventory
 
-| Signal | Source | Destination | Status |
-|--------|--------|-------------|--------|
-| SCL | J1 pin (TBD) | U1 pin 19, U2 pin 2 | In schematic via global label |
-| SDA | J1 pin (TBD) | U1 pin 20, U2 pin 4 | In schematic via global label |
-| +3.3V | J1 pin 1 (intended) | U1 VDD, U2 VDD, U2 VDDIO | In schematic |
-| GND | J1 pin 2 (intended) | U1 GND, U2 GND | In schematic |
-| ALERT_1 | U1 pin 11 | J1 (TBD) | In schematic, not wired to J1 |
-| ALERT_2 | U1 pin 12 | J1 (TBD) | In schematic, not wired to J1 |
-| ALERT_3 | U1 pin 14 | J1 (TBD) | In schematic, not wired to J1 |
-| ALERT_4 | U1 pin 15 | J1 (TBD) | In schematic, not wired to J1 |
-| INT | U2 pin 7 | J1 (TBD) | In schematic, not wired to J1 |
+The PCB net list is the ground truth for connectivity. Signals listed as "schematic only" exist as global labels in the schematic but do not appear as named nets in the PCB because U2 is not placed and/or U1's pins are unconnected.
+
+| Signal | Source | Destination | PCB Status |
+|--------|--------|-------------|------------|
+| +3.3V | J1 pin (TBD) | U1 VDD (pad 8), U2 VDD, U2 VDDIO | Named net in PCB ✓ |
+| GND | J1 pin (TBD) | U1 pads 1,3,5,6,7,9,10,13,17,18; U2 pins 3,8,9 | Named net in PCB ✓ |
+| Net-(TC1-+) | TC1 pin 1 | U1 VIN+ (pad 2) | Named net in PCB ✓ |
+| Net-(TC1--) | TC1 pin 2 | U1 VIN- (pad 4) | Named net in PCB ✓ |
+| Net-(U1-EXP-Pad21) | U1 EXP pads 21–30 | (nothing) | **Floating — NOT GND** ⚠ |
+| SCL | J1 pin (TBD) → U2 pin 2 | U1 pin 19 **unconnected** | Schematic only; U1-SCL unconnected in PCB |
+| SDA | J1 pin (TBD) → U2 pin 4 | U1 pin 20 **unconnected** | Schematic only; U1-SDA unconnected in PCB |
+| ALERT_1 | U1 pin 11 | J1 (TBD) | U1-ALERT_1 unconnected in PCB |
+| ALERT_2 | U1 pin 12 | J1 (TBD) | U1-ALERT_2 unconnected in PCB |
+| ALERT_3 | U1 pin 14 | J1 (TBD) | U1-ALERT_3 unconnected in PCB |
+| ALERT_4 | U1 pin 15 | J1 (TBD) | U1-ALERT_4 unconnected in PCB |
+| INT | U2 pin 7 | J1 (TBD) | Schematic only; U2 not in PCB |
+| ADDR | U1 pin 16 | (floating) | Unconnected in PCB → default 0x60 |
+
+**Note on SCL/SDA:** Global labels `SCL` and `SDA` exist in the schematic and are connected to U2 (BMP581) pins 2 and 4. However, U1's SCL (pin 19) and SDA (pin 20) are NOT connected to these global labels in the schematic — they are unconnected in both schematic and PCB. This is a significant design gap that must be addressed when work resumes.
 
 The ALERT outputs (MCP9600) are open-drain active-low. They require pull-up resistors
 (on host board) and can be configured for threshold monitoring via I2C registers.
@@ -79,7 +87,7 @@ The ALERT outputs (MCP9600) are open-drain active-low. They require pull-up resi
 - **No local regulation:** No LDO or switching regulator on this board
 - **BMP581 dual supply:** Requires both VDD and VDDIO; both tied to the same 3.3V rail
 - **Decoupling capacitors:** None currently placed in PCB — required before fabrication
-- **Exposed pad (U1):** MCP9600 thermal pad (pad 21) and 9 thermal vias (pads 22–30) connected to GND for thermal relief
+- **Exposed pad (U1) — DESIGN ISSUE:** MCP9600 EXP pads (21–30) are NOT connected to GND. They form an isolated net `Net-(U1-EXP-Pad21)` in the PCB. The datasheet requires the exposed thermal pad to be soldered to a GND plane. This must be corrected in the schematic before fabrication.
 
 ## PCB Design Parameters
 

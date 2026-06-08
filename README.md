@@ -45,8 +45,11 @@ Power: 3.3V from host via J1. No local regulation.
 - **U2 BMP581:** Present in schematic but not placed in PCB layout
 - **TC1 thermocouple:** No footprint assigned; connector type not chosen
 - **J1 pinout:** All 7 pins unconnected; signals not wired to J1 in schematic or PCB
+- **U1 I2C wiring:** MCP9600 SCL/SDA pins (19/20) are NOT wired to the SCL/SDA global labels in the schematic — U1 is currently isolated from the I2C bus
+- **U1 ALERT wiring:** MCP9600 ALERT_1–4 pins are also not wired in the schematic
+- **U1 EXP pad:** MCP9600 exposed thermal pad (pads 21–30) is not connected to GND — forms an isolated net (design issue)
 - **Decoupling capacitors:** None placed anywhere on PCB
-- **BMP581 library:** Missing from repo — must reinstall from SnapEDA (see below)
+- **BMP581 library:** Not in project lib tables — must reinstall from SnapEDA (see below)
 
 ---
 

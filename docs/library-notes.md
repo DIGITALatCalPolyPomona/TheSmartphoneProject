@@ -24,8 +24,11 @@ These are self-contained and will resolve without any external tooling.
   - `500X500` — 5.00mm × 5.00mm body
   - `X100` — 1.0mm height
   - `21N` — 21 electrical signal pad count
-- **Pad structure:** 20 peripheral signal pads + 1 large exposed thermal pad (pad 21) with 9 thermal via pads (pads 22–30) inside it. Total 30 pads.
-- **Standard KiCad QFN-20 was not used** — the MCP9600's exposed thermal pad required a custom variant.
+- **Pad structure:** 20 peripheral pads (10 signal pads + 10 GND pads) + 10 EXP sub-pads (pads 21–30) inside the large exposed thermal pad. Total 30 pads, 21 unique net connections.
+  - Signal pads: 2 (VIN+), 4 (VIN-), 8 (VDD), 11 (ALERT_1), 12 (ALERT_2), 14 (ALERT_3), 15 (ALERT_4), 16 (ADDR), 19 (SCL), 20 (SDA)
+  - GND pads: 1, 3, 5, 6, 7, 9, 10, 13, 17, 18
+  - EXP pads: 21–30 (exposed thermal pad — currently floating, NOT connected to GND; see `docs/components.md` U1 design issue)
+- **Standard KiCad QFN-20 was not used** — the team created a custom footprint with 10 EXP sub-pads inside the thermal pad area for via stitching to a ground plane (though the GND connection for EXP is not yet made in the schematic).
 
 ---
 
@@ -79,14 +82,21 @@ These resolve automatically when KiCad 9.0 is installed:
 
 ### `sym-lib-table` (current state)
 
+The project-level `sym-lib-table` contains **one entry only**:
+
 | Library name | Type | Path | Status |
 |-------------|------|------|--------|
-| `jackboys` | KiCad | `${KIPRJMOD}/jackboys.kicad_sym` | In repo |
-| `BMP581` | KiCad | *(SnapEDA global path — not in repo)* | **MISSING** |
+| `jackboys` | KiCad | `${KIPRJMOD}/jackboys.kicad_sym` | In repo ✓ |
+
+**BMP581 is NOT in this file.** It has no entry in the project sym-lib-table whatsoever.
+The symbol reference `BMP581:BMP581` in the schematic was resolved via the **global KiCad library** on the original developer's machine (typically `~/.config/kicad/9.0/sym-lib-table` on Linux). On any other machine, KiCad will report a missing library error.
 
 ### `fp-lib-table` (current state)
 
+The project-level `fp-lib-table` contains **one entry only**:
+
 | Library name | Type | Path | Status |
 |-------------|------|------|--------|
-| `jackboys2` | KiCad | `${KIPRJMOD}/jackboys2.pretty` | In repo |
-| `BMP581` | KiCad | *(SnapEDA global path — not in repo)* | **MISSING** |
+| `jackboys2` | KiCad | `${KIPRJMOD}/jackboys2.pretty` | In repo ✓ |
+
+**BMP581 is NOT in this file.** Same situation as the symbol — footprint `BMP581:BMP581` relied on the global KiCad library. The footprint is absent from the project-level table and will cause errors on any other machine.

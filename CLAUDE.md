@@ -18,7 +18,7 @@ Intended to plug into the Zynq-Carrier-Power host board via J1 connector.
 
 | File | Purpose |
 |------|---------|
-| `thermometer.kicad_sch` | Schematic (3,496 lines, KiCad 9.0 S-expression format) |
+| `thermometer.kicad_sch` | Schematic (3,495 lines, KiCad 9.0 S-expression format) |
 | `thermometer.kicad_pcb` | PCB layout (KiCad 9.0 S-expression format) |
 | `thermometer.kicad_pro` | Project settings and design rules (JSON) |
 | `jackboys.kicad_sym` | Custom symbol library (MCP9600-E_MX only) |
@@ -55,6 +55,19 @@ See `docs/library-notes.md` for detailed instructions.
 - **Routing:** No copper traces routed anywhere
 - **Board outline:** Edge.Cuts layer is empty (no board shape defined)
 - **J1 connector:** All 7 pins are unconnected (nets 13–19 all `unconnected-` prefixed)
+- **U1 SCL/SDA:** NOT wired to SCL/SDA global labels — U1 pins 19 and 20 are unconnected in both schematic and PCB
+- **U1 EXP pad (pads 21–30):** NOT connected to GND — forms isolated net `Net-(U1-EXP-Pad21)` (design issue, must be fixed)
+- **IgnorePin label:** An unusual `global_label "IgnorePin"` exists at schematic coordinate (96.52, 67.31) — purpose unclear, connected to a pin near U1
+
+## Known Design Issues (to fix on resumption)
+
+1. MCP9600 EXP thermal pad not connected to GND (pads 21–30 floating)
+2. MCP9600 SCL/SDA pins not connected in schematic
+3. MCP9600 ALERT_1–4 pins not connected in schematic
+4. J1 pinout undefined — all 7 pins unconnected
+5. U2 BMP581 not placed in PCB
+6. No board outline defined
+7. BMP581 library not in project lib tables (relies on global KiCad install)
 
 ## Available Skills
 
