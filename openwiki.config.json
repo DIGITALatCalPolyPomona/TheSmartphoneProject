@@ -1,0 +1,28 @@
+{
+  "$comment": "OpenWiki governance config. 'governed' patterns are artifacts that MUST be documented by an active/verified wiki page ('documents' frontmatter field). 'ignore' patterns are exempt (backups, caches, generated output, the wiki itself). See wiki/governance/documentation-standards.md.",
+  "governed": [
+    "*.kicad_pro",
+    "*.kicad_sym",
+    "*.pretty",
+    "Zynq-Carrier-Power",
+    "fp-lib-table",
+    "sym-lib-table"
+  ],
+  "ignore": [
+    "*.bak",
+    "fp-info-cache",
+    "thermometer-backups",
+    "build",
+    "graph",
+    "wiki",
+    "tools",
+    ".github",
+    ".gitmodules",
+    "CLAUDE.md",
+    "openwiki.config.json"
+  ],
+  "confluence": {
+    "space": "",
+    "$comment": "Set the target Confluence space key here when the club adopts Confluence; per-page overrides live in each page's confluence_space frontmatter field. See wiki/governance/confluence-sync.md."
+  }
+}

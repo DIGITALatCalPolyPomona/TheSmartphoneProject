@@ -1,0 +1,3 @@
+# OpenWiki Confluence export output (regenerate with: openwiki confluence)
+build/
+__pycache__/

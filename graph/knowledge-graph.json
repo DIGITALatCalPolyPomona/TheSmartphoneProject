@@ -1,0 +1,848 @@
+{
+  "version": 1,
+  "generated_by": "tools/openwiki/openwiki.py graph",
+  "source_digest": "9ceeb9b77f8a94e0715c005faa89a1d0a91f73b3a38d842a3b5edc9e071dc27b",
+  "counts": {
+    "nodes": 37,
+    "edges": 120
+  },
+  "nodes": [
+    {
+      "id": "artifact:Zynq-Carrier-Power",
+      "kind": "artifact",
+      "title": "Zynq-Carrier-Power",
+      "documented": true
+    },
+    {
+      "id": "artifact:fp-lib-table",
+      "kind": "artifact",
+      "title": "fp-lib-table",
+      "documented": true
+    },
+    {
+      "id": "artifact:jackboys.kicad_sym",
+      "kind": "artifact",
+      "title": "jackboys.kicad_sym",
+      "documented": true
+    },
+    {
+      "id": "artifact:jackboys2.pretty",
+      "kind": "artifact",
+      "title": "jackboys2.pretty",
+      "documented": true
+    },
+    {
+      "id": "artifact:sym-lib-table",
+      "kind": "artifact",
+      "title": "sym-lib-table",
+      "documented": true
+    },
+    {
+      "id": "artifact:thermometer.kicad_pro",
+      "kind": "artifact",
+      "title": "thermometer.kicad_pro",
+      "documented": true
+    },
+    {
+      "id": "owner:digital-club",
+      "kind": "owner",
+      "title": "digital-club"
+    },
+    {
+      "id": "tag:ai-agents",
+      "kind": "tag",
+      "title": "ai-agents"
+    },
+    {
+      "id": "tag:configuration",
+      "kind": "tag",
+      "title": "configuration"
+    },
+    {
+      "id": "tag:confluence",
+      "kind": "tag",
+      "title": "confluence"
+    },
+    {
+      "id": "tag:daughter-board",
+      "kind": "tag",
+      "title": "daughter-board"
+    },
+    {
+      "id": "tag:decision-record",
+      "kind": "tag",
+      "title": "decision-record"
+    },
+    {
+      "id": "tag:footprints",
+      "kind": "tag",
+      "title": "footprints"
+    },
+    {
+      "id": "tag:governance",
+      "kind": "tag",
+      "title": "governance"
+    },
+    {
+      "id": "tag:guide",
+      "kind": "tag",
+      "title": "guide"
+    },
+    {
+      "id": "tag:home",
+      "kind": "tag",
+      "title": "home"
+    },
+    {
+      "id": "tag:kicad",
+      "kind": "tag",
+      "title": "kicad"
+    },
+    {
+      "id": "tag:library",
+      "kind": "tag",
+      "title": "library"
+    },
+    {
+      "id": "tag:onboarding",
+      "kind": "tag",
+      "title": "onboarding"
+    },
+    {
+      "id": "tag:openwiki",
+      "kind": "tag",
+      "title": "openwiki"
+    },
+    {
+      "id": "tag:overview",
+      "kind": "tag",
+      "title": "overview"
+    },
+    {
+      "id": "tag:power",
+      "kind": "tag",
+      "title": "power"
+    },
+    {
+      "id": "tag:sensor",
+      "kind": "tag",
+      "title": "sensor"
+    },
+    {
+      "id": "tag:submodule",
+      "kind": "tag",
+      "title": "submodule"
+    },
+    {
+      "id": "tag:symbols",
+      "kind": "tag",
+      "title": "symbols"
+    },
+    {
+      "id": "tag:zynq",
+      "kind": "tag",
+      "title": "zynq"
+    },
+    {
+      "id": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "kind": "page",
+      "title": "DIGITALBot Submodule Added and Removed (Aug 2025)",
+      "type": "decision",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:governance/agent-governance",
+      "kind": "page",
+      "title": "Agent Governance",
+      "type": "governance",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:governance/confluence-sync",
+      "kind": "page",
+      "title": "Confluence Sync Design",
+      "type": "governance",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:governance/documentation-standards",
+      "kind": "page",
+      "title": "Documentation Standards (OpenWiki)",
+      "type": "governance",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:guides/getting-started",
+      "kind": "page",
+      "title": "Getting Started for New Members",
+      "type": "guide",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:hardware/thermometer",
+      "kind": "page",
+      "title": "Thermometer Daughter Board",
+      "type": "hardware",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:hardware/zynq-carrier-power",
+      "kind": "page",
+      "title": "Zynq Carrier Power (submodule)",
+      "type": "hardware",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:index",
+      "kind": "page",
+      "title": "The Smartphone Project",
+      "type": "overview",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:libraries/jackboys-symbols",
+      "kind": "page",
+      "title": "jackboys Symbol Library",
+      "type": "library",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:libraries/jackboys2-footprints",
+      "kind": "page",
+      "title": "jackboys2 Footprint Library",
+      "type": "library",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:libraries/library-tables",
+      "kind": "page",
+      "title": "KiCad Library Tables",
+      "type": "library",
+      "status": "active",
+      "updated": "2026-07-09",
+      "confluence_page_id": ""
+    }
+  ],
+  "edges": [
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:governance/agent-governance",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:governance/confluence-sync",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:guides/getting-started",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:hardware/thermometer",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:hardware/zynq-carrier-power",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:index",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:libraries/library-tables",
+      "rel": "owns"
+    },
+    {
+      "from": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "to": "tag:decision-record",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "to": "tag:submodule",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "to": "wiki:hardware/zynq-carrier-power",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "to": "wiki:hardware/zynq-carrier-power",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/agent-governance",
+      "to": "tag:ai-agents",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/agent-governance",
+      "to": "tag:governance",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/agent-governance",
+      "to": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:governance/agent-governance",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/agent-governance",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/confluence-sync",
+      "to": "tag:confluence",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/confluence-sync",
+      "to": "tag:governance",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/confluence-sync",
+      "to": "tag:openwiki",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/confluence-sync",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:governance/confluence-sync",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/confluence-sync",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/documentation-standards",
+      "to": "tag:governance",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/documentation-standards",
+      "to": "tag:openwiki",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/documentation-standards",
+      "to": "wiki:governance/agent-governance",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/documentation-standards",
+      "to": "wiki:governance/confluence-sync",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:governance/documentation-standards",
+      "to": "wiki:governance/confluence-sync",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/documentation-standards",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "tag:guide",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "tag:kicad",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "tag:onboarding",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:governance/agent-governance",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:governance/confluence-sync",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:hardware/thermometer",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:hardware/thermometer",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:hardware/zynq-carrier-power",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:hardware/zynq-carrier-power",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:libraries/library-tables",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:guides/getting-started",
+      "to": "wiki:libraries/library-tables",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "artifact:thermometer.kicad_pro",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "tag:daughter-board",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "tag:kicad",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "tag:sensor",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "wiki:libraries/library-tables",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "artifact:Zynq-Carrier-Power",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "tag:kicad",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "tag:power",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "tag:submodule",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "tag:zynq",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "wiki:guides/getting-started",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "wiki:guides/getting-started",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:hardware/zynq-carrier-power",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "tag:home",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:index",
+      "to": "tag:kicad",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:index",
+      "to": "tag:overview",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:decisions/2025-08-digitalbot-submodule-removal",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:governance/agent-governance",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:governance/confluence-sync",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:guides/getting-started",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:guides/getting-started",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:hardware/thermometer",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:hardware/thermometer",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:hardware/zynq-carrier-power",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:hardware/zynq-carrier-power",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:libraries/library-tables",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:index",
+      "to": "wiki:libraries/library-tables",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "artifact:jackboys.kicad_sym",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "tag:kicad",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "tag:library",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "tag:symbols",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "wiki:hardware/thermometer",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "wiki:hardware/thermometer",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "wiki:libraries/library-tables",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/jackboys-symbols",
+      "to": "wiki:libraries/library-tables",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "artifact:jackboys2.pretty",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "tag:footprints",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "tag:kicad",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "tag:library",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "wiki:hardware/thermometer",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "wiki:hardware/thermometer",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "wiki:libraries/library-tables",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/jackboys2-footprints",
+      "to": "wiki:libraries/library-tables",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "artifact:fp-lib-table",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "artifact:sym-lib-table",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "tag:configuration",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "tag:kicad",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "tag:library",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "wiki:hardware/thermometer",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "wiki:hardware/thermometer",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "wiki:libraries/jackboys-symbols",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:libraries/library-tables",
+      "to": "wiki:libraries/jackboys2-footprints",
+      "rel": "related"
+    }
+  ]
+}
