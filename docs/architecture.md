@@ -12,7 +12,7 @@ two sensors that respond as I2C slaves.
 
 ## Block Diagram
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │               Host Board (Zynq-Carrier-Power)        │
 │                                                     │

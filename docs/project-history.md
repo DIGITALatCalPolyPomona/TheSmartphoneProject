@@ -41,6 +41,7 @@ submoduled in Aug 2025.)
 ## Submodule History
 
 ### Zynq-Carrier-Power
+
 - **URL:** `https://github.com/eryn-chen/Zynq-Carrier-Power` (branch: master)
 - **Added:** August 13, 2025
 - **Status:** Entry present in `.gitmodules`; **populated** on the maintainer's checkout at `7aed9fc` (upstream `master` tip as of Oct 2026). Fresh clones get an empty directory until `git submodule update --init` is run.
@@ -48,6 +49,7 @@ submoduled in Aug 2025.)
 - **To initialize (fresh clones):** `git submodule update --init`
 
 ### DIGITALBot
+
 - **Added:** ~August 23, 2025
 - **Removed:** August 26, 2025 (commit `c81e8e5`)
 - **Purpose:** Unclear in context of this hardware project; appeared to be a chatbot submodule
@@ -77,6 +79,7 @@ These were open issues in the design when work stopped:
 ## Why Abandoned
 
 No explicit reason recorded in commit messages. Last activity (August 23–26) was submodule cleanup with no schematic or PCB changes. The PCB remained incomplete:
+
 - No copper traces routed
 - No board outline defined
 - BMP581 not placed in PCB (schematic only)

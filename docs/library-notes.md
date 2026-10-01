@@ -45,19 +45,25 @@ These are self-contained and will resolve without any external tooling.
 
 1. Download the KiCad format package from SnapEDA (`.kicad_sym` + `.kicad_mod`)
 2. Place files in the repo:
-   ```
+
+   ```text
    BMP581.kicad_sym
    BMP581.pretty/
    └── BMP581.kicad_mod
    ```
+
 3. Add to `sym-lib-table`:
-   ```
+
+   ```text
    (lib (name "BMP581")(type "KiCad")(uri "${KIPRJMOD}/BMP581.kicad_sym")(options "")(descr ""))
    ```
+
 4. Add to `fp-lib-table`:
-   ```
+
+   ```text
    (lib (name "BMP581")(type "KiCad")(uri "${KIPRJMOD}/BMP581.pretty")(options "")(descr ""))
    ```
+
 5. Commit both files and the updated library tables to the repo.
 
 Localizing prevents future broken-reference issues if SnapEDA updates or removes the part.

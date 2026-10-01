@@ -21,12 +21,14 @@ page that lists it in `documents:` — same branch, `updated:` date bumped.
 ## Step 1 — Identify changed files
 
 Run both:
-```
+
+```bash
 git diff --name-only
 git diff --cached --name-only
 ```
 
 Filter to governed artifacts:
+
 - `.kicad_sch` — schematic changes
 - `.kicad_pcb` — PCB layout changes
 - `.kicad_sym` — symbol library changes
@@ -92,7 +94,7 @@ is the standing example).
 
 ## Step 6 — Impact report
 
-```
+```text
 ## Documentation Impact Report
 
 ### Changed governed artifacts
@@ -115,7 +117,7 @@ is the standing example).
 
 ## Step 7 — After approval (mandatory gate)
 
-```
+```bash
 python3 tools/openwiki/openwiki.py graph    # regenerate graph/ — commit it
 python3 tools/openwiki/openwiki.py check    # must pass — CI runs it
 python3 tools/ci/kicad_sanity.py

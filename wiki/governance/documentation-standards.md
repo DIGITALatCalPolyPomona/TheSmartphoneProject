@@ -70,7 +70,7 @@ knowledge graph and are validated (a link to a nonexistent page fails CI).
 
 ## How to add a page
 
-```
+```bash
 python3 tools/openwiki/openwiki.py new hardware hardware/my-board
 # edit wiki/hardware/my-board.md, fill in frontmatter + body
 python3 tools/openwiki/openwiki.py check

@@ -67,6 +67,7 @@ The BMP581 symbol and footprint (`BMP581:BMP581`) are **not stored in this repos
 KiCad will show missing library errors without them.
 
 **Reinstall steps:**
+
 1. Download KiCad package from https://www.snapeda.com/parts/BMP581/Bosch/view-part/
 2. Extract `.kicad_sym` and `.kicad_mod` files
 3. Copy into repo as `BMP581.kicad_sym` + `BMP581.pretty/BMP581.kicad_mod`
@@ -77,7 +78,7 @@ See `docs/library-notes.md` for detailed instructions.
 
 ## Repository Structure
 
-```
+```text
 TheSmartphoneProject/
 ├── thermometer.kicad_sch         # Main schematic
 ├── thermometer.kicad_pcb         # PCB layout
@@ -117,7 +118,7 @@ https://github.com/eryn-chen/Zynq-Carrier-Power (branch: master). It is
 **populated** on the maintainer's checkout, pinned at `7aed9fc` (upstream
 `master` tip as of Oct 2026). On a fresh clone it will be empty until you run:
 
-```
+```bash
 git submodule update --init
 ```
 
@@ -137,7 +138,7 @@ knowledge. To prevent a repeat, documentation is enforced, not hoped for:
   [`wiki/governance/agent-governance.md`](wiki/governance/agent-governance.md).
 - Gate command (run before every commit; CI runs it too):
 
-```
+```bash
 python3 tools/openwiki/openwiki.py check
 ```
 

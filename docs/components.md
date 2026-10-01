@@ -47,6 +47,7 @@ Fix the wiring (not the symbol) and re-run ERC.
 ### Footprint Detail
 
 Footprint name decoded: `QFN65P500X500X100-21N_MCP9600-E_MX`
+
 - `QFN` — Quad Flat No-lead
 - `65P` — 0.65mm pad pitch
 - `500X500` — 5.00mm × 5.00mm body

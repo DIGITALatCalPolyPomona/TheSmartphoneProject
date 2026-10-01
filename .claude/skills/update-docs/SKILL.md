@@ -13,6 +13,7 @@ Invoke as `/update-docs` to audit only.
 Invoke as `/update-docs apply` to audit and immediately apply all proposed changes.
 
 **Update targets, in priority order:**
+
 1. `wiki/` pages — governed; any governed-artifact change REQUIRES a matching
    wiki update in the same branch (rule: `wiki/governance/agent-governance.md`).
 2. `docs/*.md` and `README.md` — human-facing docs; keep consistent with the wiki.
@@ -66,13 +67,16 @@ Read these files to establish current design state. Read them in full — they a
 Compile these facts from Step 1 before auditing any docs:
 
 **Components in schematic:**
+
 - Reference | Value | Footprint assigned (yes/no and library:name) | I2C address
 
 **Components in PCB:**
+
 - Which References have a `(footprint ...)` block → "placed in PCB"
 - Which References from schematic are absent from PCB → "schematic only"
 
 **Net connectivity:**
+
 - Which J1 pins still have `unconnected-(J1-...)` nets vs named signals
 - Any other `unconnected-` nets (e.g. U1 SCL/SDA/ALERT/EXP pads)
 
@@ -81,6 +85,7 @@ Compile these facts from Step 1 before auditing any docs:
 **Routing:** do any `(segment ...)` blocks exist?
 
 **Library state:**
+
 - Is `BMP581:BMP581` listed in `sym-lib-table` with a `${KIPRJMOD}/` local path? (If not: still missing)
 - Any new `.kicad_sym` or `.kicad_mod` files not yet documented?
 
@@ -126,7 +131,7 @@ Check the specific items below. Note discrepancies as STALE or MISSING.
 
 ## Step 4 — Produce the staleness report
 
-```
+```text
 ## Documentation Audit Report
 Date: [today's date]
 
@@ -157,6 +162,7 @@ Date: [today's date]
 **`/update-docs apply`:** skip the question, apply all proposed changes.
 
 Apply order (wiki first — it is the governed source):
+
 1. Affected `wiki/` pages (content + `updated:` date)
 2. `docs/components.md`, `docs/connector-pinout.md`, `docs/architecture.md`,
    `docs/library-notes.md`
@@ -167,7 +173,7 @@ Apply order (wiki first — it is the governed source):
 
 After ANY applied change:
 
-```
+```bash
 python3 tools/openwiki/openwiki.py graph    # regenerate graph/ — commit it
 python3 tools/openwiki/openwiki.py check    # must pass — CI runs it
 python3 tools/ci/kicad_sanity.py            # structural check
@@ -175,6 +181,7 @@ python3 tools/ci/kicad_sanity.py            # structural check
 
 Then output:
 > "Updated [N] files. `openwiki check`: PASS. Changes made:
+>
 > - `[filename]`: [one-line summary]
 > - ..."
 

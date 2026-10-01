@@ -12,6 +12,7 @@ keep `wiki/` truthful and `graph/` in sync, per
 Working loop:
 0. Read `wiki/index.md`, then the wiki page(s) covering every artifact you
    are about to touch (ground rule 1).
+
 1. `python3 tools/openwiki/openwiki.py verify` — find gaps, stale pages, stubs.
 2. For each gap: read the artifact (KiCad files are s-expression text),
    then create or update the wiki page. New pages via

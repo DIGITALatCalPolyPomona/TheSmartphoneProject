@@ -4,7 +4,7 @@ Single-file, stdlib-only CLI (`openwiki.py`, Python 3.8+) behind the
 `wiki/` knowledgebase. No pip installs — it must run on any lab machine
 that can run KiCad.
 
-```
+```bash
 python3 tools/openwiki/openwiki.py validate      # schema-check every page
 python3 tools/openwiki/openwiki.py verify        # doc coverage of governed artifacts
 python3 tools/openwiki/openwiki.py graph         # regenerate graph/ (JSON + Mermaid)

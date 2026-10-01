@@ -40,11 +40,13 @@ project already died once for lack of it. Full rules:
 2. Every change to a governed artifact updates its wiki page in the same
    branch (content + `updated:` date). CI fails otherwise.
 3. Before declaring work done, run:
-   ```
+
+   ```bash
    python3 tools/openwiki/openwiki.py graph   # regen knowledge graph
    python3 tools/openwiki/openwiki.py check   # the CI gate — must pass
    python3 tools/ci/kicad_sanity.py           # kicad file sanity
    ```
+
 4. Never hand-edit `graph/` or `build/` (generated). Never set a page's
    `status: verified` (humans only). Never delete wiki pages or decision
    records — archive instead.
