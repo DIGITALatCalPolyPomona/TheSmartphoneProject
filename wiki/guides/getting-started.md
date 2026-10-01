@@ -5,7 +5,7 @@ type: guide
 status: active
 owners: [digital-club]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-10-01
 tags: [guide, onboarding, kicad]
 related: [index, hardware/thermometer, hardware/zynq-carrier-power, libraries/library-tables, governance/documentation-standards]
 ---
@@ -37,7 +37,7 @@ The design files were saved with **KiCad 9.0** (schematic format 20250114, board
 
 ## 3. Open the project
 
-Start KiCad and open **`thermometer.kicad_pro`** at the repo root (File > Open Project). Always open the `.kicad_pro` project file, not the `.kicad_sch` or `.kicad_pcb` directly — the project file carries settings and the project-local library tables.
+Start KiCad and open **`thermometer.kicad_pro`** at the repo root (File > Open Project). Always open the `.kicad_pro` project file, not the `.kicad_sch` or `.kicad_pcb` directly — the project context pulls in the sibling `sym-lib-table`/`fp-lib-table` files that register the project-local libraries.
 
 ## 4. How the libraries resolve (and why it "just works")
 
@@ -45,7 +45,7 @@ The project uses **project-local library tables** (`sym-lib-table` and `fp-lib-t
 
 ## 5. The one error you WILL see: missing BMP581 library
 
-When you open the schematic, KiCad will report a **missing library for U2 (the Bosch BMP581 pressure sensor)**. This is not something you broke. The original author kept the `BMP581` symbol/footprint library only on their own machine — it was never committed to the repo and never added to the library tables.
+U2 (the Bosch BMP581 pressure sensor) still **displays** in the schematic — its symbol is embedded in the file's `lib_symbols` cache — but its library link is broken: KiCad warns about the missing `BMP581` library, the symbol can't be updated from a library, and the footprint can't resolve for PCB sync. This is not something you broke. The original author kept the `BMP581` symbol/footprint library only on their own machine — it was never committed to the repo and never added to the library tables.
 
 What to do:
 
@@ -54,7 +54,7 @@ What to do:
 
 ## 6. Know what state the design is in
 
-Read [[hardware/thermometer]] before assuming anything works. Headline: the schematic captures the intent, but the PCB has **no board outline** and most nets (I2C, alerts, all connector pins) are **unrouted**. The design was paused mid-flight, not finished.
+Read [[hardware/thermometer]] before assuming anything works. Headline: the PCB has **no board outline and zero routed copper**, and the schematic itself was paused **mid-rewiring with active defects** (a grounded SCL pin, swapped alert labels, unpowered chips). The design was paused mid-flight, not finished — fix the schematic before touching the layout.
 
 ## 7. The documentation rule (read before you change anything)
 
@@ -64,7 +64,9 @@ This repo is governed by a documentation-as-code policy: **any change to a desig
 python3 tools/openwiki/openwiki.py check
 ```
 
-Run that before committing. The full rules are in [[governance/documentation-standards]]; also see [[governance/agent-governance]] and [[governance/confluence-sync]] for how automation and the Confluence export interact with the wiki. Two things are exempt from the policy: `fp-info-cache` (an auto-generated ~4 MB KiCad cache) and `thermometer-backups/` (historical auto-backup zips).
+(On Windows the interpreter may be `python` or `py` instead of `python3`.)
+
+Run that before committing. The full rules are in [[governance/documentation-standards]]; also see [[governance/agent-governance]] and [[governance/confluence-sync]] for how automation and the Confluence export interact with the wiki. Notable exemptions from the policy: `fp-info-cache` (an auto-generated ~4 MB KiCad cache) and `thermometer-backups/` (historical auto-backup zips) — the full `ignore` list lives in `openwiki.config.json`.
 
 ## 8. Suggested first tasks
 

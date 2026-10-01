@@ -2,6 +2,8 @@
   "$comment": "OpenWiki governance config. 'governed' patterns are artifacts that MUST be documented by an active/verified wiki page ('documents' frontmatter field). 'ignore' patterns are exempt (backups, caches, generated output, the wiki itself). See wiki/governance/documentation-standards.md.",
   "governed": [
     "*.kicad_pro",
+    "*.kicad_sch",
+    "*.kicad_pcb",
     "*.kicad_sym",
     "*.pretty",
     "Zynq-Carrier-Power",
@@ -10,15 +12,21 @@
   ],
   "ignore": [
     "*.bak",
+    "*.kicad_prl",
     "fp-info-cache",
     "thermometer-backups",
     "build",
     "graph",
     "wiki",
     "tools",
+    "docs",
     ".github",
     ".gitmodules",
+    ".gitignore",
+    ".markdownlint-cli2.jsonc",
+    "README.md",
     "CLAUDE.md",
+    "AGENTS.md",
     "openwiki.config.json"
   ],
   "confluence": {

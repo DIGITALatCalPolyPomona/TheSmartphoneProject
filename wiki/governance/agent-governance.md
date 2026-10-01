@@ -6,7 +6,7 @@ status: active
 owners: [digital-club]
 tags: [governance, ai-agents]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-10-01
 related: [governance/documentation-standards, index]
 ---
 
@@ -17,7 +17,8 @@ reviews, refactoring — to be done or assisted by AI agents, because the
 human team turns over every academic year. These rules keep agent work
 safe, reviewable, and knowledge-preserving. They bind any autonomous or
 semi-autonomous agent (Claude Code sessions, CI bots, future tools) working
-in this repository. `CLAUDE.md` at the repo root points agents here.
+in this repository. `AGENTS.md` at the repo root is the canonical summary
+(`CLAUDE.md` imports it) and points agents here.
 
 ## Ground rules
 

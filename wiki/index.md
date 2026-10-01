@@ -5,7 +5,7 @@ type: overview
 status: active
 owners: [digital-club]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-10-01
 tags: [kicad, overview, home]
 related: [hardware/thermometer, hardware/zynq-carrier-power, libraries/jackboys-symbols, libraries/jackboys2-footprints, libraries/library-tables, guides/getting-started, decisions/2025-08-digitalbot-submodule-removal, governance/documentation-standards]
 ---
@@ -28,15 +28,18 @@ Work on this repository ran from **July to August 2025** and then stopped. Key d
 
 | Date | Event |
 |------|-------|
-| 2025-07-16 | Earliest design activity (KiCad auto-backup zips in `thermometer-backups/` predate the git history) |
+| 2025-07-16 | Earliest design activity — five KiCad auto-backup zips in `thermometer-backups/` (a sixth is from 2025-07-27) |
 | 2025-07-19 | First git commit (pyson2k, paung@cpp.edu) |
-| 2025-08-13 | Zynq-Carrier-Power added as a submodule (eryn-chen) |
+| 2025-08-13 | Zynq-Carrier-Power added as a submodule (pixelatedknight27 commit `0baa108`, with same-day `.gitmodules` fixes by eryn-chen) |
 | 2025-08-23 to 2025-08-26 | A DIGITALBot submodule was added, reverted, re-added, and finally removed — see [[decisions/2025-08-digitalbot-submodule-removal]] |
-| 2025-08-26 | Last commit ("Removed DititalBot Submodule" — typo in the original message) |
+| 2025-08-26 | Last commit of the original design work (`c81e8e5`, "Removed DititalBot Submodule" — typo in the original message) |
+| 2026-02-05 | A fingerprint-sensor design zip was uploaded on the `TheFingerprintSensor` branch (never merged to main) |
+| 2026-06 | Documentation preservation pass (`0a96fb0`, `b8c614a`, PR #1) |
+| 2026-07-09 | OpenWiki knowledgebase added (PR #2) |
 
-Original contributors: pixelatedknight27 (maxgross72@gmail.com, ~9 commits), eryn-chen (eryncchen@gmail.com, 4), Sebastian Graciano (sebgra518@gmail.com, 1), pyson2k (paung@cpp.edu, 1).
+Original contributors: pixelatedknight27 (maxgross72@gmail.com, ~9 commits across two author emails), eryn-chen (eryncchen@gmail.com, 4), pyson2k (paung@cpp.edu, 2), Sebastian Graciano (sebgra518@gmail.com, 1), Angelo Duenas (personalangeloduenas@gmail.com, 1), ARussellChung (russellchungatcpp.edu@gmail.com, 1 on the TheFingerprintSensor branch).
 
-The project was left **mid-design, not finished**: the thermometer board has an incomplete layout (no board outline, most nets unrouted) and one missing library (the BMP581 sensor's symbol/footprint library was never committed). Each subsystem page below lists exactly what is unfinished.
+The project was left **mid-design, not finished**: the thermometer board has an incomplete layout (no board outline, zero routed copper) and a **half-finished schematic rewiring with active miswiring** (a grounded SCL pin, swapped alert labels, unpowered chips) plus one missing library (the BMP581 sensor's symbol/footprint library was never committed). Each subsystem page below lists exactly what is unfinished.
 
 ## Subsystems and pages
 

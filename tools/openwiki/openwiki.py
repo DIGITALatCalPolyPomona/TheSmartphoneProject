@@ -119,7 +119,9 @@ def discover_pages():
             full = os.path.join(dirpath, name)
             rel = os.path.relpath(full, WIKI_DIR).replace(os.sep, "/")
             with open(full, "r", encoding="utf-8") as fh:
-                text = fh.read()
+                # normalize CRLF — a Windows (core.autocrlf) checkout must not
+                # break frontmatter parsing
+                text = fh.read().replace("\r\n", "\n")
             try:
                 meta, body = parse_frontmatter(text, rel)
                 pages.append(Page(rel, meta, body))
@@ -140,7 +142,9 @@ def load_config():
 
 
 def _matches_any(rel, patterns):
-    return any(fnmatch.fnmatch(rel, p) or fnmatch.fnmatch(os.path.basename(rel), p)
+    # fnmatchcase: fnmatch is case-insensitive on Windows (os.path.normcase),
+    # which would make governed/documented sets platform-dependent
+    return any(fnmatch.fnmatchcase(rel, p) or fnmatch.fnmatchcase(os.path.basename(rel), p)
                for p in patterns)
 
 
@@ -232,7 +236,8 @@ def validate(pages, config, report=True):
             if target not in ids:
                 errors.append(prefix + "link to unknown page '%s'" % target)
         for doc in page.meta.get("documents", []):
-            hits = fnmatch.filter(_all_repo_paths(), doc) if any(c in doc for c in "*?[") \
+            hits = [p for p in _all_repo_paths() if fnmatch.fnmatchcase(p, doc)] \
+                if any(c in doc for c in "*?[") \
                 else ([doc] if os.path.exists(os.path.join(REPO_ROOT, doc)) else [])
             if not hits:
                 errors.append(prefix + "documents entry '%s' matches nothing in the repo" % doc)
@@ -267,7 +272,7 @@ def _all_repo_paths():
 
 def _covers(page, artifact):
     for doc in page.meta.get("documents", []):
-        if doc == artifact or fnmatch.fnmatch(artifact, doc):
+        if doc == artifact or fnmatch.fnmatchcase(artifact, doc):
             return True
     return False
 
@@ -490,7 +495,7 @@ def confluence_export(pages, config):
     for page in sorted(pages, key=lambda p: p.meta.get("id", "")):
         if page.errors or not page.meta.get("id"):
             continue
-        if page.meta.get("status") in ("stub", "archived"):
+        if page.meta.get("status") not in ("active", "verified"):
             continue
         xhtml = md_to_storage(page.body)
         rel = page.meta["id"].replace("/", "__") + ".xhtml"
@@ -522,8 +527,13 @@ def new_page(page_type, page_id):
     if page_type not in PAGE_TYPES:
         raise SystemExit("unknown type '%s'; expected one of: %s"
                          % (page_type, ", ".join(PAGE_TYPES)))
+    if not re.fullmatch(r"[a-z0-9][a-z0-9/_-]*", page_id):
+        raise SystemExit("invalid page id '%s' — use lowercase [a-z0-9/_-] "
+                         "(e.g. hardware/my-board)" % page_id)
     template = os.path.join(WIKI_DIR, "_templates", page_type + ".md")
-    dest = os.path.join(WIKI_DIR, page_id + ".md")
+    dest = os.path.normpath(os.path.join(WIKI_DIR, page_id + ".md"))
+    if not dest.startswith(os.path.normpath(WIKI_DIR) + os.sep):
+        raise SystemExit("page id escapes wiki/")
     if os.path.exists(dest):
         raise SystemExit("wiki/%s.md already exists" % page_id)
     with open(template, "r", encoding="utf-8") as fh:

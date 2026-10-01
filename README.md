@@ -4,7 +4,8 @@ Hardware project by **DIGITAL at Cal Poly Pomona** (KiCad 9). A sensor
 daughter board, the **Zynq-Carrier-Power** submodule, and the custom
 **jackboys** part libraries.
 
-**Status:** Abandoned August 2025. Preserved for future resumption.
+**Status:** Paused August 2025 mid-rewire — the schematic has active wiring
+defects (see below). Preserved for future resumption; documentation maintained.
 
 ## Start here
 
@@ -21,38 +22,44 @@ barometric pressure (using the BMP581 sensor). Both sensors communicate over a s
 bus exposed on a 7-pin 1mm-pitch header (J1) for connection to a host board.
 
 The host board was intended to be the [Zynq-Carrier-Power](https://github.com/eryn-chen/Zynq-Carrier-Power)
-(a Zynq-7000 FPGA carrier board by eryn-chen). The Zynq acts as the I2C master.
+(a template carrier for pinguz97's Zynq SoM, by eryn-chen). The Zynq acts as the I2C master.
 
 ## Hardware Summary
 
-| Ref | Part | Function | Package | I2C Address | Status |
+| Ref | Part | Function | Package | I2C Address (intent) | Status |
 |-----|------|----------|---------|-------------|--------|
-| U1 | MCP9600-E_MX | Thermocouple amplifier + cold-junction compensation | QFN-30 (5×5mm) | 0x60 | Schematic + PCB (unrouted) |
-| U2 | BMP581 | Barometric pressure + temperature sensor | LGA-10 (2×2mm) | 0x46 (SDO=GND) | Schematic only |
-| TC1 | Thermocouple | External temperature probe | External | — | Schematic only, no footprint |
-| J1 | 7-pin 1mm header | Interface to host board | 1mm pitch THT | — | PCB placed, all pins unconnected |
+| U1 | MCP9600-E_MX | Thermocouple amplifier + cold-junction compensation | QFN-20+EP (5×5mm, custom 30-pad footprint) | 0x60 | Schematic (miswired) + PCB footprint (unrouted) |
+| U2 | BMP581 | Barometric pressure + temperature sensor | LGA-10 (2×2mm) | 0x46 | Schematic only (miswired), no footprint in PCB |
+| TC1 | Thermocouple | External temperature probe | External | — | Schematic (wires stop short of U1), no footprint |
+| J1 | 7-pin 1mm header | Interface to host board | 1mm pitch THT | — | Schematic labeled (no power pins); PCB pads unconnected |
 
-Power: 3.3V from host via J1. No local regulation.
+Power: intended 3.3V from host via J1 — **but no J1 pin is assigned to +3.3V or
+GND**; the board's power path is unresolved. No local regulation.
 
-## What Is Complete
+## Design State (verified 2026-10-01)
 
-- Schematic: U1 (MCP9600) and U2 (BMP581) both placed and wired with I2C and power signals
+- Schematic: U1 (MCP9600) and U2 (BMP581) placed — but the last edit left them
+  **miswired**: the wiring was drawn for vertically-mirrored symbol geometry that
+  isn't applied, so signals land on wrong pins (details below).
 - Custom MCP9600 symbol library: `jackboys.kicad_sym`
-- Custom MCP9600 QFN-30 footprint: `jackboys2.pretty/`
-- U1 and J1 footprints placed on PCB
+- Custom MCP9600 footprint (20 leads + EP + thermal vias): `jackboys2.pretty/`
+- U1 and J1 footprints placed on PCB; PCB netlist is **stale** — it predates the
+  schematic rewiring and must not be trusted or synced until the schematic is fixed.
 
-## What Is Incomplete
+## What Is Broken / Incomplete
 
-- **PCB routing:** No copper traces — board is fully unrouted
-- **Board outline:** Edge.Cuts layer is empty; no board dimensions defined
-- **U2 BMP581:** Present in schematic but not placed in PCB layout
-- **TC1 thermocouple:** No footprint assigned; connector type not chosen
-- **J1 pinout:** All 7 pins unconnected; signals not wired to J1 in schematic or PCB
-- **U1 I2C wiring:** MCP9600 SCL/SDA pins (19/20) are NOT wired to the SCL/SDA global labels in the schematic — U1 is currently isolated from the I2C bus
-- **U1 ALERT wiring:** MCP9600 ALERT_1–4 pins are also not wired in the schematic
-- **U1 EXP pad:** MCP9600 exposed thermal pad (pads 21–30) is not connected to GND — forms an isolated net (design issue)
-- **Decoupling capacitors:** None placed anywhere on PCB
-- **BMP581 library:** Not in project lib tables — must reinstall from SnapEDA (see below)
+- **Schematic miswiring (top priority):** U1 SCL pin (19) tied to GND, SDA (20)
+  floating, ADDR (16) on the `SCL` net, ALERT_2/ALERT_4 labels swapped on the
+  physical pins, VDD unpowered, all GND pins floating; U2 SCL pin (2) tied to
+  +3.3V, SDO/ADR (5) on the `INT` net, INT (7) tied to GND, SDA/VDDIO/GNDs
+  floating; TC1 wires end before reaching U1.
+- **J1 pinout:** all 7 pins carry signal labels (`INT`, `ALERT_4`..`ALERT_1`,
+  `SDA`, `SCL`) — leaving **no pin for power or ground**. A power-path decision
+  is required.
+- **PCB:** no copper routed, no board outline, U2/TC1 not placed; netlist stale.
+- **Decoupling capacitors:** none exist (schematic has zero C/R symbols).
+- **BMP581 library:** not in project lib tables — must reinstall from SnapEDA (see below).
+- **U1 EXP pad:** exposed thermal pad (pads 21–30) floating, not on GND.
 
 ## Before Opening in KiCad
 
@@ -82,12 +89,16 @@ TheSmartphoneProject/
 ├── sym-lib-table                 # Symbol library search paths
 ├── fp-lib-table                  # Footprint library search paths
 ├── fp-info-cache                 # KiCad footprint cache (auto-generated)
-├── thermometer-backups/          # Pre-git KiCad backup archives
-├── Zynq-Carrier-Power/           # Submodule (empty — see below)
+├── thermometer-backups/          # KiCad backup archives (5 pre-git + 1 post)
+├── Zynq-Carrier-Power/           # Submodule (populated here at 7aed9fc — see below)
 ├── wiki/                         # OpenWiki knowledgebase (Markdown + frontmatter)
 ├── graph/                        # Generated knowledge graph — do not hand-edit
 ├── tools/openwiki/               # OpenWiki CLI (stdlib-only Python)
+├── tools/ci/kicad_sanity.py      # KiCad file structural sanity checker
 ├── openwiki.config.json          # Which artifacts require wiki documentation
+├── .github/workflows/            # CI: openwiki.yml, docs.yml
+├── .claude/                      # Claude skills + agents (update-docs, review-changes)
+├── thermometer.kicad_prl         # KiCad per-user project settings
 ├── AGENTS.md                     # Agent instructions (cross-tool canonical)
 ├── CLAUDE.md                     # Claude Code entry point (imports AGENTS.md)
 ├── README.md                     # This file
@@ -102,9 +113,16 @@ TheSmartphoneProject/
 ## Submodule: Zynq-Carrier-Power
 
 The `Zynq-Carrier-Power` directory is a git submodule referencing
-https://github.com/eryn-chen/Zynq-Carrier-Power (branch: master).
+https://github.com/eryn-chen/Zynq-Carrier-Power (branch: master). It is
+**populated** on the maintainer's checkout, pinned at `7aed9fc` (upstream
+`master` tip as of Oct 2026). On a fresh clone it will be empty until you run:
 
-To initialize it: `git submodule update --init --recursive`
+```
+git submodule update --init
+```
+
+Note: no connector matching J1 (1.00mm, 7-pin) exists in the carrier design —
+the mating interface is unresolved. See `docs/connector-pinout.md`.
 
 ## The knowledgebase is governed
 

@@ -10,6 +10,8 @@ keep `wiki/` truthful and `graph/` in sync, per
 `wiki/governance/agent-governance.md` — read both before acting.
 
 Working loop:
+0. Read `wiki/index.md`, then the wiki page(s) covering every artifact you
+   are about to touch (ground rule 1).
 1. `python3 tools/openwiki/openwiki.py verify` — find gaps, stale pages, stubs.
 2. For each gap: read the artifact (KiCad files are s-expression text),
    then create or update the wiki page. New pages via
@@ -19,7 +21,8 @@ Working loop:
 3. `python3 tools/openwiki/openwiki.py graph` then
    `python3 tools/openwiki/openwiki.py check` — finish only when check passes.
 
-Constraints: never delete pages or decision records (archive instead);
-never hand-edit `graph/` or `build/`; write for inexperienced student
-engineers; document only what you can verify in the files — mark inferences
-as inferences.
+Constraints: never delete pages, decision records, or
+`thermometer-backups/` contents (archive instead); never delete hardware
+files without an accompanying decision page; never hand-edit `graph/` or
+`build/`; write for inexperienced student engineers; document only what you
+can verify in the files — mark inferences as inferences.

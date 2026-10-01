@@ -1,10 +1,10 @@
 {
   "version": 1,
   "generated_by": "tools/openwiki/openwiki.py graph",
-  "source_digest": "9ceeb9b77f8a94e0715c005faa89a1d0a91f73b3a38d842a3b5edc9e071dc27b",
+  "source_digest": "0895f54a50829877ed2e26317fb392d160f67770aadf13fd14614fc71895c8d7",
   "counts": {
-    "nodes": 37,
-    "edges": 120
+    "nodes": 39,
+    "edges": 122
   },
   "nodes": [
     {
@@ -38,9 +38,21 @@
       "documented": true
     },
     {
+      "id": "artifact:thermometer.kicad_pcb",
+      "kind": "artifact",
+      "title": "thermometer.kicad_pcb",
+      "documented": true
+    },
+    {
       "id": "artifact:thermometer.kicad_pro",
       "kind": "artifact",
       "title": "thermometer.kicad_pro",
+      "documented": true
+    },
+    {
+      "id": "artifact:thermometer.kicad_sch",
+      "kind": "artifact",
+      "title": "thermometer.kicad_sch",
       "documented": true
     },
     {
@@ -149,7 +161,7 @@
       "title": "DIGITALBot Submodule Added and Removed (Aug 2025)",
       "type": "decision",
       "status": "active",
-      "updated": "2026-07-09",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -158,7 +170,7 @@
       "title": "Agent Governance",
       "type": "governance",
       "status": "active",
-      "updated": "2026-07-09",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -167,7 +179,7 @@
       "title": "Confluence Sync Design",
       "type": "governance",
       "status": "active",
-      "updated": "2026-07-09",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -185,7 +197,7 @@
       "title": "Getting Started for New Members",
       "type": "guide",
       "status": "active",
-      "updated": "2026-07-09",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -194,7 +206,7 @@
       "title": "Thermometer Daughter Board",
       "type": "hardware",
       "status": "active",
-      "updated": "2026-07-09",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -203,7 +215,7 @@
       "title": "Zynq Carrier Power (submodule)",
       "type": "hardware",
       "status": "active",
-      "updated": "2026-07-09",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -212,7 +224,7 @@
       "title": "The Smartphone Project",
       "type": "overview",
       "status": "active",
-      "updated": "2026-07-09",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -481,7 +493,17 @@
     },
     {
       "from": "wiki:hardware/thermometer",
+      "to": "artifact:thermometer.kicad_pcb",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
       "to": "artifact:thermometer.kicad_pro",
+      "rel": "documents"
+    },
+    {
+      "from": "wiki:hardware/thermometer",
+      "to": "artifact:thermometer.kicad_sch",
       "rel": "documents"
     },
     {

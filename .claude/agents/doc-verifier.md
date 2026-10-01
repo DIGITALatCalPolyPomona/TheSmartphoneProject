@@ -16,6 +16,8 @@ You change nothing; you report.
    their artifact's last change, (d) a pass/fail verdict on "does proper
    documentation exist for this work".
 
-Never edit files, never run the `graph`, `new`, or `confluence` commands,
-never set statuses. If you find a gap, describe exactly what page or
-section is missing so the doc-steward agent can fix it.
+Never edit files, never run the mutating `graph`, `new`, or `confluence`
+commands, never set statuses. (`check` internally runs `graph --check`,
+which is read-only and permitted.) Use Bash only for the openwiki CLI, `git`
+read commands, and file inspection. If you find a gap, describe exactly what
+page or section is missing so the doc-steward agent can fix it.

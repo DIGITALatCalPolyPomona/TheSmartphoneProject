@@ -6,7 +6,7 @@ status: active
 owners: [digital-club]
 tags: [governance, confluence, openwiki]
 created: 2026-07-09
-updated: 2026-07-09
+updated: 2026-10-01
 related: [governance/documentation-standards, index]
 ---
 
@@ -26,8 +26,8 @@ can turn it on in an afternoon.
   `verified` page body to **Confluence storage format** (the XHTML dialect
   Confluence's REST API accepts) in `build/confluence/`, plus a
   `manifest.json` mapping each page id → title, space, `page_id`, parent,
-  and a `content_sha256` for change detection. `stub` and `archived` pages
-  are excluded.
+  and a `content_sha256` for change detection. Only `active` and `verified`
+  pages are exported — `stub`, `draft`, and `archived` pages are excluded.
 - Page bodies are restricted to a Markdown subset (see
   [[governance/documentation-standards]]) precisely so this conversion
   stays lossless.

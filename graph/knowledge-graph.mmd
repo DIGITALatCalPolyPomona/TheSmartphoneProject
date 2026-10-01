@@ -5,7 +5,9 @@ graph LR
     artifact_jackboys_kicad_sym[("jackboys.kicad_sym")]
     artifact_jackboys2_pretty[("jackboys2.pretty")]
     artifact_sym_lib_table[("sym-lib-table")]
+    artifact_thermometer_kicad_pcb[("thermometer.kicad_pcb")]
     artifact_thermometer_kicad_pro[("thermometer.kicad_pro")]
+    artifact_thermometer_kicad_sch[("thermometer.kicad_sch")]
     owner_digital_club(["digital-club"])
     wiki_decisions_2025_08_digitalbot_submodule_removal["DIGITALBot Submodule Added and Removed (Aug 2025)"]
     wiki_governance_agent_governance["Agent Governance"]
@@ -53,7 +55,9 @@ graph LR
     wiki_guides_getting_started -->|related| wiki_index
     wiki_guides_getting_started -->|references| wiki_libraries_library_tables
     wiki_guides_getting_started -->|related| wiki_libraries_library_tables
+    wiki_hardware_thermometer -->|documents| artifact_thermometer_kicad_pcb
     wiki_hardware_thermometer -->|documents| artifact_thermometer_kicad_pro
+    wiki_hardware_thermometer -->|documents| artifact_thermometer_kicad_sch
     wiki_hardware_thermometer -->|references| wiki_governance_documentation_standards
     wiki_hardware_thermometer -->|related| wiki_index
     wiki_hardware_thermometer -->|references| wiki_libraries_jackboys_symbols
