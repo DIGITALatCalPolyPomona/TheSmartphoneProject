@@ -105,3 +105,13 @@ When docs need updating (after any design or process change):
 
 Claude Code users also have `/update-docs` and `/review-changes` skills
 (`.claude/skills/`) that wrap this workflow.
+
+## Notion cross-check
+
+The club's Notion workspace is a human-facing mirror of `wiki/` (git stays
+the source of truth). The `notion` MCP server is declared in `.mcp.json` /
+`.devin/mcp.json` (`https://mcp.notion.com/mcp` — OAuth on first connect, no
+secrets in the repo). To verify the two are on the same page, run the
+`/notion-sync` skill (`.claude/skills/notion-sync/SKILL.md`): it inventories
+both sides, compares mapped pages, and reports drift — writes to Notion only
+on approval. Design notes: `wiki/governance/notion-sync.md`.

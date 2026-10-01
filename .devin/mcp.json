@@ -1,0 +1,9 @@
+{
+  "$comment": "Project MCP servers for Devin. 'notion' is Notion's official hosted MCP server (OAuth on first connect — each user authorizes their own workspace). Used by the notion-sync workflow to cross-check wiki/ against the club's Notion knowledge base. No secrets live in this file.",
+  "mcpServers": {
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp"
+    }
+  }
+}

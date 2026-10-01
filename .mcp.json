@@ -1,0 +1,9 @@
+{
+  "$comment": "Project MCP servers (Claude Code format). Mirror of .devin/mcp.json — keep the two files in sync. 'notion' is Notion's hosted MCP server; first use triggers an OAuth flow. For a token-based local server instead, replace with: npx -y @notionhq/notion-mcp-server with env NOTION_TOKEN (never commit the token).",
+  "mcpServers": {
+    "notion": {
+      "type": "http",
+      "url": "https://mcp.notion.com/mcp"
+    }
+  }
+}

@@ -13,6 +13,7 @@ graph LR
     wiki_governance_agent_governance["Agent Governance"]
     wiki_governance_confluence_sync["Confluence Sync Design"]
     wiki_governance_documentation_standards["Documentation Standards (OpenWiki)"]
+    wiki_governance_notion_sync["Notion Sync (MCP cross-check)"]
     wiki_guides_getting_started["Getting Started for New Members"]
     wiki_hardware_thermometer["Thermometer Daughter Board"]
     wiki_hardware_zynq_carrier_power["Zynq Carrier Power (submodule)"]
@@ -24,6 +25,7 @@ graph LR
     owner_digital_club -->|owns| wiki_governance_agent_governance
     owner_digital_club -->|owns| wiki_governance_confluence_sync
     owner_digital_club -->|owns| wiki_governance_documentation_standards
+    owner_digital_club -->|owns| wiki_governance_notion_sync
     owner_digital_club -->|owns| wiki_guides_getting_started
     owner_digital_club -->|owns| wiki_hardware_thermometer
     owner_digital_club -->|owns| wiki_hardware_zynq_carrier_power
@@ -44,6 +46,11 @@ graph LR
     wiki_governance_documentation_standards -->|references| wiki_governance_confluence_sync
     wiki_governance_documentation_standards -->|related| wiki_governance_confluence_sync
     wiki_governance_documentation_standards -->|related| wiki_index
+    wiki_governance_notion_sync -->|references| wiki_governance_confluence_sync
+    wiki_governance_notion_sync -->|related| wiki_governance_confluence_sync
+    wiki_governance_notion_sync -->|related| wiki_governance_documentation_standards
+    wiki_governance_notion_sync -->|references| wiki_index
+    wiki_governance_notion_sync -->|related| wiki_index
     wiki_guides_getting_started -->|references| wiki_governance_agent_governance
     wiki_guides_getting_started -->|references| wiki_governance_confluence_sync
     wiki_guides_getting_started -->|references| wiki_governance_documentation_standards

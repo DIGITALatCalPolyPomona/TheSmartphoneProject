@@ -1,10 +1,10 @@
 {
   "version": 1,
   "generated_by": "tools/openwiki/openwiki.py graph",
-  "source_digest": "0895f54a50829877ed2e26317fb392d160f67770aadf13fd14614fc71895c8d7",
+  "source_digest": "9c11ec060460ea6f8436b9fabb53bafd1cace1beaf5fbeb491344ea7106416be",
   "counts": {
-    "nodes": 39,
-    "edges": 122
+    "nodes": 42,
+    "edges": 132
   },
   "nodes": [
     {
@@ -116,6 +116,16 @@
       "title": "library"
     },
     {
+      "id": "tag:mcp",
+      "kind": "tag",
+      "title": "mcp"
+    },
+    {
+      "id": "tag:notion",
+      "kind": "tag",
+      "title": "notion"
+    },
+    {
       "id": "tag:onboarding",
       "kind": "tag",
       "title": "onboarding"
@@ -189,6 +199,15 @@
       "type": "governance",
       "status": "active",
       "updated": "2026-07-09",
+      "confluence_page_id": ""
+    },
+    {
+      "id": "wiki:governance/notion-sync",
+      "kind": "page",
+      "title": "Notion Sync (MCP cross-check)",
+      "type": "governance",
+      "status": "active",
+      "updated": "2026-10-01",
       "confluence_page_id": ""
     },
     {
@@ -274,6 +293,11 @@
     {
       "from": "owner:digital-club",
       "to": "wiki:governance/documentation-standards",
+      "rel": "owns"
+    },
+    {
+      "from": "owner:digital-club",
+      "to": "wiki:governance/notion-sync",
       "rel": "owns"
     },
     {
@@ -418,6 +442,51 @@
     },
     {
       "from": "wiki:governance/documentation-standards",
+      "to": "wiki:index",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "tag:governance",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "tag:mcp",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "tag:notion",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "tag:openwiki",
+      "rel": "tagged"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "wiki:governance/confluence-sync",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "wiki:governance/confluence-sync",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "wiki:governance/documentation-standards",
+      "rel": "related"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
+      "to": "wiki:index",
+      "rel": "references"
+    },
+    {
+      "from": "wiki:governance/notion-sync",
       "to": "wiki:index",
       "rel": "related"
     },
