@@ -24,11 +24,11 @@ These are self-contained and will resolve without any external tooling.
   - `500X500` — 5.00mm × 5.00mm body
   - `X100` — 1.0mm height
   - `21N` — 21 electrical signal pad count
-- **Pad structure:** 20 peripheral pads (10 signal pads + 10 GND pads) + 10 EXP sub-pads (pads 21–30) inside the large exposed thermal pad. Total 30 pads, 21 unique net connections.
+- **Pad structure:** the `.kicad_mod` defines **30 pad objects** — 20 perimeter `smd` pads (0.81×0.32mm on 0.65mm pitch: 10 signal + 10 GND) + pad 21 (the 3.25×3.25mm `smd` exposed thermal pad at center) + pads 22–30 (`thru_hole` Ø0.5mm/0.3mm-drill thermal vias in a 3×3 grid under the EP). Electrically this is **12 unique nets** (10 signal + GND + EXP) — the "21N" in the name is the IPC terminal count (20 leads + EP), not net count.
   - Signal pads: 2 (VIN+), 4 (VIN-), 8 (VDD), 11 (ALERT_1), 12 (ALERT_2), 14 (ALERT_3), 15 (ALERT_4), 16 (ADDR), 19 (SCL), 20 (SDA)
   - GND pads: 1, 3, 5, 6, 7, 9, 10, 13, 17, 18
-  - EXP pads: 21–30 (exposed thermal pad — currently floating, NOT connected to GND; see `docs/components.md` U1 design issue)
-- **Standard KiCad QFN-20 was not used** — the team created a custom footprint with 10 EXP sub-pads inside the thermal pad area for via stitching to a ground plane (though the GND connection for EXP is not yet made in the schematic).
+  - EXP pads: 21–30 (exposed thermal pad + its thermal vias — currently floating, NOT connected to GND; see `docs/components.md` U1 design issue)
+- **Standard KiCad QFN-20 was not used** — the team created a custom footprint with the EP split into an SMD pad + thru-hole thermal-via pads for via stitching to a ground plane (though the GND connection for EXP is not yet made in the schematic).
 
 ---
 
@@ -45,19 +45,25 @@ These are self-contained and will resolve without any external tooling.
 
 1. Download the KiCad format package from SnapEDA (`.kicad_sym` + `.kicad_mod`)
 2. Place files in the repo:
-   ```
+
+   ```text
    BMP581.kicad_sym
    BMP581.pretty/
    └── BMP581.kicad_mod
    ```
+
 3. Add to `sym-lib-table`:
-   ```
+
+   ```text
    (lib (name "BMP581")(type "KiCad")(uri "${KIPRJMOD}/BMP581.kicad_sym")(options "")(descr ""))
    ```
+
 4. Add to `fp-lib-table`:
-   ```
+
+   ```text
    (lib (name "BMP581")(type "KiCad")(uri "${KIPRJMOD}/BMP581.pretty")(options "")(descr ""))
    ```
+
 5. Commit both files and the updated library tables to the repo.
 
 Localizing prevents future broken-reference issues if SnapEDA updates or removes the part.
@@ -89,7 +95,7 @@ The project-level `sym-lib-table` contains **one entry only**:
 | `jackboys` | KiCad | `${KIPRJMOD}/jackboys.kicad_sym` | In repo ✓ |
 
 **BMP581 is NOT in this file.** It has no entry in the project sym-lib-table whatsoever.
-The symbol reference `BMP581:BMP581` in the schematic was resolved via the **global KiCad library** on the original developer's machine (typically `~/.config/kicad/9.0/sym-lib-table` on Linux). On any other machine, KiCad will report a missing library error.
+The symbol reference `BMP581:BMP581` in the schematic was resolved via the **global KiCad library** on the original developer's machine (typically `~/.config/kicad/9.0/sym-lib-table` on Linux, `%APPDATA%\kicad\9.0\` on Windows). On any other machine, KiCad reports a missing library — though U2 still *renders* because the symbol is embedded in the file's `lib_symbols` cache; the error bites on symbol update, ERC library checks, and PCB sync.
 
 ### `fp-lib-table` (current state)
 
@@ -99,4 +105,4 @@ The project-level `fp-lib-table` contains **one entry only**:
 |-------------|------|------|--------|
 | `jackboys2` | KiCad | `${KIPRJMOD}/jackboys2.pretty` | In repo ✓ |
 
-**BMP581 is NOT in this file.** Same situation as the symbol — footprint `BMP581:BMP581` relied on the global KiCad library. The footprint is absent from the project-level table and will cause errors on any other machine.
+**BMP581 is NOT in this file.** Same situation as the symbol — footprint `BMP581:BMP581` relied on the global KiCad library. The footprint is absent from the project-level table, so U2 cannot be placed/synced on any other machine.

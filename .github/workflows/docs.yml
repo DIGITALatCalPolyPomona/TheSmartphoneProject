@@ -1,0 +1,57 @@
+name: Documentation checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  markdown:
+    name: markdownlint (README, docs/, wiki/, agents)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          config: .markdownlint-cli2.jsonc
+
+  links:
+    name: internal link check (all Markdown)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          # --offline: verify every relative link/anchor resolves to a real
+          # file without hitting the network (external URLs are skipped —
+          # SnapEDA/datasheet links rot is real but must not flake CI).
+          args: --offline --include-fragments --no-progress './**/*.md'
+          fail: true
+
+  kicad:
+    name: KiCad file sanity (sexp, lib tables)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: kicad sanity
+        run: python3 tools/ci/kicad_sanity.py
+
+  docs-freshness:
+    name: hardware change without doc update
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: governed artifacts changed but no docs/wiki update
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          echo "$CHANGED"
+          HW=$(echo "$CHANGED" | grep -E '\.kicad_(sch|pcb|pro|sym|mod)$|\.pretty/|lib-table|\.gitmodules' || true)
+          DOCS=$(echo "$CHANGED" | grep -E '^(wiki/|docs/|README\.md|CLAUDE\.md|AGENTS\.md)' || true)
+          if [ -n "$HW" ] && [ -z "$DOCS" ]; then
+            echo "::error::Hardware/governed files changed with no doc update. Update the matching wiki page (per wiki/governance/documentation-standards.md) or docs/ in the same PR."
+            exit 1
+          fi

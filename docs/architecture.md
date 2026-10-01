@@ -3,14 +3,16 @@
 ## System Context
 
 This daughter board is a peripheral sensor module designed to plug into the
-**Zynq-Carrier-Power** host board (a Zynq-7000 FPGA carrier, separate repository:
-https://github.com/eryn-chen/Zynq-Carrier-Power). The host board provides 3.3V
-power and acts as the I2C master. This board contains two sensors that respond
-as I2C slaves.
+**Zynq-Carrier-Power** host board (a carrier/template for pinguz97's Zynq SoM,
+separate repository: https://github.com/eryn-chen/Zynq-Carrier-Power). The host
+board was intended to provide 3.3V power and act as the I2C master — though no
+power/ground pin is currently assigned on J1 and no J1-compatible mate exists
+on the carrier design, so the host interface is unresolved. This board contains
+two sensors that respond as I2C slaves.
 
 ## Block Diagram
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │               Host Board (Zynq-Carrier-Power)        │
 │                                                     │
@@ -20,73 +22,81 @@ as I2C slaves.
 └──────────────────────┬──────────────────────────────┘
                        │
                   J1 (7-pin, 1mm pitch)
-                  Signals: +3.3V, GND, SCL, SDA,
-                           ALERT/INT (3 pins, TBD)
+                  Schematic labels: INT, ALERT_4..1,
+                           SDA, SCL — NO +3.3V/GND pin ⚠
                        │
 ┌──────────────────────▼──────────────────────────────┐
 │           Thermometer Daughter Board                 │
 │                                                     │
-│  +3.3V ──────┬────────────────────────────┐        │
-│              │                            │        │
-│        ┌─────▼──────┐            ┌────────▼────┐   │
-│        │ U1          │            │ U2           │   │
-│        │ MCP9600-E_MX│            │ BMP581       │   │
-│        │ Thermocouple│            │ Pressure     │   │
-│        │ Amplifier   │            │ Sensor       │   │
-│        │ I2C: 0x60   │            │ I2C: 0x46    │   │
-│        │ QFN-30      │            │ LGA-10       │   │
+│  +3.3V ─ dead-end stub near U1.EXP ────► U2.VDD    │
+│              (reaches no J1 pin; U1.VDD unpowered)  │
+│        ┌───────────┐            ┌────────────┐     │
+│        │ U1         │            │ U2          │    │
+│        │ MCP9600-E_MX│            │ BMP581      │   │
+│        │ Thermocouple│            │ Pressure    │   │
+│        │ Amplifier   │            │ Sensor      │   │
+│        │ I2C: 0x60*  │            │ I2C: 0x46*  │   │
+│        │ QFN-20+EP   │            │ LGA-10      │   │
+│        │ (30-pad fp) │            │             │   │
 │        └──┬──────────┘            └──────────┬──┘   │
-│           │SCL,SDA (not wired)        SCL,SDA│      │
-│           │ALERT_1–4 (not wired)          INT│      │
-│  GND ─────┴───────────────────────────────┴─┘      │
+│      miswired ⚠                        miswired ⚠  │
+│  SCL pin→GND, SDA float,          SCL pin→+3.3V,   │
+│  ALERT_2/4 swapped,               SDA float,       │
+│  ADDR on SCL net                  SDO↔INT swapped  │
 │                                                     │
-│  TC1 (External Thermocouple) ──► U1 VIN+/VIN-      │
+│  TC1 (Thermocouple) ── wires stop short of U1 ⚠    │
+│  *addresses are intent only — see I2C Bus           │
 └─────────────────────────────────────────────────────┘
 ```
 
 ## I2C Bus
 
-Both U1 and U2 share a single I2C bus. The Zynq host is the only master.
+Both U1 and U2 were intended to share a single I2C bus with the Zynq host as the
+only master. **As drawn, neither device is actually on the bus:** U1's SCL pin is
+tied to GND and its SDA pin floats; U2's SCL pin is tied to +3.3V and its SDA pin
+floats. The `SCL`/`SDA` global labels reach J1 (pins 7/6) but land on the wrong
+device pins (U1.ADDR, U2.CSB / nothing).
 
-| Device | Address | Address Pin | Notes |
-|--------|---------|-------------|-------|
-| U1 MCP9600 | 0x60 | ADDR floating | Default address (ADDR=0) |
-| U2 BMP581 | 0x46 | SDO/ADR = GND | SDO tied low in schematic |
+| Device | Address (intent) | Address Pin | Actual wiring |
+|--------|---------|-------------|---------------|
+| U1 MCP9600 | 0x60 | ADDR → `SCL` net (should be strapped/float for 0x60) | Miswired — address indeterminate |
+| U2 BMP581 | 0x46 | SDO/ADR → `INT` net (should be GND for 0x46) | Miswired — address indeterminate |
 
 **Pull-up resistors:** None on this board. The host board (Zynq-Carrier-Power)
-is responsible for SCL and SDA pull-ups to 3.3V.
+was expected to provide SCL and SDA pull-ups to 3.3V.
 
 ## Signal Inventory
 
-The PCB net list is the ground truth for connectivity. Signals listed as "schematic only" exist as global labels in the schematic but do not appear as named nets in the PCB because U2 is not placed and/or U1's pins are unconnected.
+Two connectivity truths exist and differ: the **schematic** (what the labels and
+wires currently implement) and the **PCB netlist** (stale — captured before the
+J1 label row and symbol rewiring were added; "Update PCB from Schematic" was
+never run since). The table shows both.
 
-| Signal | Source | Destination | PCB Status |
-|--------|--------|-------------|------------|
-| +3.3V | J1 pin (TBD) | U1 VDD (pad 8), U2 VDD, U2 VDDIO | Named net in PCB ✓ |
-| GND | J1 pin (TBD) | U1 pads 1,3,5,6,7,9,10,13,17,18; U2 pins 3,8,9 | Named net in PCB ✓ |
-| Net-(TC1-+) | TC1 pin 1 | U1 VIN+ (pad 2) | Named net in PCB ✓ |
-| Net-(TC1--) | TC1 pin 2 | U1 VIN- (pad 4) | Named net in PCB ✓ |
-| Net-(U1-EXP-Pad21) | U1 EXP pads 21–30 | (nothing) | **Floating — NOT GND** ⚠ |
-| SCL | J1 pin (TBD) → U2 pin 2 | U1 pin 19 **unconnected** | Schematic only; U1-SCL unconnected in PCB |
-| SDA | J1 pin (TBD) → U2 pin 4 | U1 pin 20 **unconnected** | Schematic only; U1-SDA unconnected in PCB |
-| ALERT_1 | U1 pin 11 | J1 (TBD) | U1-ALERT_1 unconnected in PCB |
-| ALERT_2 | U1 pin 12 | J1 (TBD) | U1-ALERT_2 unconnected in PCB |
-| ALERT_3 | U1 pin 14 | J1 (TBD) | U1-ALERT_3 unconnected in PCB |
-| ALERT_4 | U1 pin 15 | J1 (TBD) | U1-ALERT_4 unconnected in PCB |
-| INT | U2 pin 7 | J1 (TBD) | Schematic only; U2 not in PCB |
-| ADDR | U1 pin 16 | (floating) | Unconnected in PCB → default 0x60 |
+| Signal | Schematic connectivity (verified 2026-10-01) | PCB netlist (stale) |
+|--------|--------|------------|
+| +3.3V | U2 VDD (pin 10), U2 SCK/SCL (pin 2) ⚠, dead-end stub near U1 EXP; **no J1 pin** | `+3.3V` net on U1 VDD pad 8 (from pre-rewire netlist) |
+| GND | U1 SCL pin 19 ⚠, U2 INT pin 7 ⚠; U1/U2 real GND pins floating; **no J1 pin** | `GND` net on U1 pads 1,3,5,6,7,9,10,13,17,18 (stale) |
+| TC1 + | TC1 pin 1 — wire ends before reaching U1 VIN+ pin ⚠ | `Net-(TC1-+)` on U1 pad 2 (stale) |
+| TC1 − | TC1 pin 2 — wire ends before reaching U1 VIN− pin ⚠ | `Net-(TC1--)` on U1 pad 4 (stale) |
+| Net-(U1-EXP-Pad21) | U1 EXP pads 21–30 — anonymous net, floating | Same — **NOT GND** ⚠ |
+| SCL | J1.7 + U1 **ADDR** (16) + U2 **CSB** (6) — wrong pins ⚠ | `unconnected-(J1-Pin_7)` etc.; U1-SCL on `unconnected-(U1-SCL-Pad19)` |
+| SDA | J1.6 only — dead end (U1 pin 20, U2 pin 4 unconnected) | `unconnected-` nets |
+| ALERT_1 | J1.5 only — dead end (U1 pin 11 bare) | `unconnected-` nets |
+| ALERT_2 | J1.4 + U1 pin 15 (physical ALERT_4 — swapped ⚠) | `unconnected-` nets |
+| ALERT_3 | J1.3 + U1 pin 14 ✓ (only correct alert) | `unconnected-` nets |
+| ALERT_4 | J1.2 + U1 pin 12 (physical ALERT_2 — swapped ⚠) | `unconnected-` nets |
+| INT | J1.1 + U2 **SDO/ADR** (5) — should be U2 INT (7), which is grounded ⚠ | `unconnected-` nets |
 
-**Note on SCL/SDA:** Global labels `SCL` and `SDA` exist in the schematic and are connected to U2 (BMP581) pins 2 and 4. However, U1's SCL (pin 19) and SDA (pin 20) are NOT connected to these global labels in the schematic — they are unconnected in both schematic and PCB. This is a significant design gap that must be addressed when work resumes.
-
-The ALERT outputs (MCP9600) are open-drain active-low. They require pull-up resistors
-(on host board) and can be configured for threshold monitoring via I2C registers.
+The ALERT outputs (MCP9600) are register-configurable (push-pull or open-drain,
+active-high/low) per datasheet DS20005426 — whether host pull-ups are needed
+depends on the programmed configuration; none exist on this board either way.
 
 ## Power Architecture
 
-- **Supply:** Single 3.3V rail from J1
+- **Supply:** Intended single 3.3V rail from the host — **but no J1 pin is assigned to +3.3V or GND**, so the board currently has no defined power entry. Resolving this (pin reassignment, wider connector, or separate power) is a required design decision.
 - **No local regulation:** No LDO or switching regulator on this board
-- **BMP581 dual supply:** Requires both VDD and VDDIO; both tied to the same 3.3V rail
-- **Decoupling capacitors:** None currently placed in PCB — required before fabrication
+- **BMP581 dual supply:** Requires both VDD and VDDIO — only VDD (pin 10) is actually on +3.3V; VDDIO (pin 1) is unconnected ⚠
+- **Decoupling capacitors:** None exist — the schematic contains zero capacitor/resistor symbols; required before fabrication
 - **Exposed pad (U1) — DESIGN ISSUE:** MCP9600 EXP pads (21–30) are NOT connected to GND. They form an isolated net `Net-(U1-EXP-Pad21)` in the PCB. The datasheet requires the exposed thermal pad to be soldered to a GND plane. This must be corrected in the schematic before fabrication.
 
 ## PCB Design Parameters

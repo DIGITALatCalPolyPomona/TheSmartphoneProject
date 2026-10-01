@@ -1,0 +1,16 @@
+# OpenWiki Confluence export output (regenerate with: openwiki confluence)
+build/
+__pycache__/
+
+# KiCad lock / autosave files (prefix-tilde lock files, not ~$)
+~*.lck
+_autosave-*
+*.kicad_sch-bak
+*.kicad_pcb-bak
+# NOTE: thermometer-backups/ and jackboys.bak are tracked history — do NOT ignore.
+
+# Editor / OS noise (Windows-mounted checkout, rotating student editors)
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

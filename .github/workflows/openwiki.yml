@@ -1,0 +1,19 @@
+name: OpenWiki governance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    name: validate wiki, coverage, knowledge graph
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # full history so 'openwiki verify' can compare artifact commit
+          # dates against page 'updated' dates for staleness warnings
+          fetch-depth: 0
+      - name: openwiki check
+        run: python3 tools/openwiki/openwiki.py check
